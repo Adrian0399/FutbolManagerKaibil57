@@ -6,6 +6,7 @@ import {
   User,
 } from "../types/auth";
 import { authService } from "../services/authService";
+import { setLogoutCallback } from "../utils/api";
 
 export const AuthContext = createContext<AuthContextType | undefined>(
   undefined
@@ -81,6 +82,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       throw error;
     }
   };
+
+  // Registrar callback de logout global para manejar 403
+  useEffect(() => {
+    setLogoutCallback(logout);
+  }, []);
 
   const value: AuthContextType = {
     user,

@@ -1,5 +1,5 @@
 import { LoginCredentials, AuthResponse } from "../types/auth";
-import { API_URL, handleApiError } from "../utils/api";
+import { API_URL, handleApiError, fetchWithAuth } from "../utils/api";
 
 const TOKEN_STORAGE_KEY = "auth_tokens";
 const USER_STORAGE_KEY = "auth_user";
@@ -7,17 +7,13 @@ const USER_STORAGE_KEY = "auth_user";
 export const authService = {
   async login(credentials: LoginCredentials): Promise<AuthResponse> {
     try {
-      const response = await fetch(`${API_URL}/login`, {
+      const response = await fetchWithAuth(`${API_URL}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(credentials),
       });
-
-      if (!response.ok) {
-        throw new Error("Login failed");
-      }
 
       const data = await response.json();
       return data;
@@ -30,17 +26,13 @@ export const authService = {
     refreshToken: string
   ): Promise<{ accessToken: string; newRefreshToken?: string }> {
     try {
-      const response = await fetch(`${API_URL}/refresh`, {
+      const response = await fetchWithAuth(`${API_URL}/refresh`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ refreshToken }),
       });
-
-      if (!response.ok) {
-        throw new Error("Token refresh failed");
-      }
 
       const data = await response.json();
       return data;
@@ -51,17 +43,13 @@ export const authService = {
 
   async logout(refreshToken: string, userId: number): Promise<void> {
     try {
-      const response = await fetch(`${API_URL}/logout`, {
+      await fetchWithAuth(`${API_URL}/logout`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ refreshToken, userId }),
       });
-
-      if (!response.ok) {
-        throw new Error("Logout failed");
-      }
     } catch (error) {
       throw new Error(handleApiError(error));
     }

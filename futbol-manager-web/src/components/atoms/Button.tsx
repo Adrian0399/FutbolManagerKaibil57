@@ -69,7 +69,9 @@ export const Button: React.FC<ButtonProps> = ({
       aria-label={ariaLabel}
       className={className}
     >
-      {isLoading ? (
+      {isLoading && isIconOnly ? (
+        <Spinner color="current" size="sm" />
+      ) : isLoading ? (
         <>
           <Spinner color="current" size="sm" />
           {loadingText}

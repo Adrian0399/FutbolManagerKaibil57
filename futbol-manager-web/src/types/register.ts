@@ -7,12 +7,6 @@ export interface RegisterRequest {
   birthDate: string;
   gender: string;
   phoneNumber?: string;
-  otpCode?: string;
-}
-
-export interface OtpResponse {
-  message: string;
-  otpCode?: string; // Solo en desarrollo
 }
 
 export interface RegisterResponse {

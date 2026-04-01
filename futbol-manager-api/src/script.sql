@@ -36,19 +36,3 @@ INSERT INTO roles (name, description) VALUES
 -- Create indexes for better search performance
 CREATE INDEX idx_users_email ON users(email);
 CREATE INDEX idx_users_role_id ON users(role_id);
-
--- Create OTP table
-CREATE TABLE otps (
-  id SERIAL PRIMARY KEY,
-  email VARCHAR(100),
-  phone_number VARCHAR(20),
-  code VARCHAR(6) NOT NULL,
-  attempts INTEGER DEFAULT 0,
-  expires_at TIMESTAMP NOT NULL,
-  is_verified BOOLEAN DEFAULT FALSE,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE INDEX idx_otps_email ON otps(email);
-CREATE INDEX idx_otps_phone_number ON otps(phone_number);

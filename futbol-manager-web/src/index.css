@@ -7,3 +7,81 @@ html {
     background-color 0.3s ease,
     color 0.3s ease;
 }
+
+/* Variables de colores tipo ProStats */
+:root {
+  --neon-green: #d4ff00;
+  --dark-bg: #0a0e27;
+  --surface-dark: #1a1f3a;
+  --accent-neon: #d4ff00;
+}
+
+/* Mejora de scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(212, 255, 0, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(212, 255, 0, 0.5);
+}
+
+/* Transiciones suaves */
+* {
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+/* Botones con efecto hover */
+button {
+  position: relative;
+  overflow: hidden;
+}
+
+button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+button:hover::before {
+  left: 100%;
+}
+
+/* Efecto neon para textos accent */
+.text-accent {
+  text-shadow: 0 0 10px rgba(212, 255, 0, 0.3);
+}
+
+/* Links con efecto */
+a {
+  position: relative;
+}
+
+a::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--neon-green), transparent);
+  transition: width 0.3s ease;
+}
+
+a:hover::after {
+  width: 100%;
+}

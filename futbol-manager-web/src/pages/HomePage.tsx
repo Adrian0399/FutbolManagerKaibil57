@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Navbar } from "../components/Navbar";
 import { useAuth } from "../hooks/useAuth";
 import { userService } from "../services/userService";
 import { User } from "../types/user";
@@ -34,7 +33,6 @@ export const HomePage = () => {
 
   return (
     <div className="bg-background text-foreground min-h-screen">
-      <Navbar />
       <div className="min-h-screen bg-background p-8">
         <div className="max-w-7xl mx-auto">
           {/* Welcome Section */}
